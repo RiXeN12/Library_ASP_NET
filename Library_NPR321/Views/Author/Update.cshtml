@@ -1,0 +1,25 @@
+﻿@model Author
+
+<h1>Edit author</h1>
+
+<form method="post" asp-controller="Author" asp-action="Update">
+    @Html.HiddenFor(a => a.Id)
+
+    <div class="form-group" style="width: 40%">
+        <label asp-for="FirstName" class="m-1">First name</label>
+        <input asp-for="FirstName" class="form-control m-1" placeholder="First name">
+        <span class="error-message" asp-validation-for="FirstName"></span>
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="LastName" class="m-1">Last name</label>
+        <input asp-for="LastName" class="form-control m-1" placeholder="Last name">
+        <span class="error-message" asp-validation-for="LastName"></span>
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Birthday" class="m-1">Birthday</label>
+        <input type="date" min="0500-01-01" asp-for="Birthday" class="form-control m-1">
+        <span class="error-message" asp-validation-for="Birthday"></span>
+    </div>
+    <button type="submit" class="btn btn-success m-2">Save</button>
+    <a asp-controller="Author" asp-action="Index" class="btn btn-secondary m-2">Back</a>
+</form>

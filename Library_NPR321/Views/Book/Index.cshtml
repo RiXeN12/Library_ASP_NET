@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Book>
+
+<div>
+    <div class="container d-flex p-2">
+        <h1>Книги</h1>
+        <div style="text-align: right; flex-grow: 1;">
+            <a asp-controller="Book" asp-action="Create" class="btn btn-secondary">Додати книгу</a>
+        </div>
+    </div>
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Назва
+                    </th>
+                    <th>
+                        Опис
+                    </th>
+                    <th>
+                        Мова
+                    </th>
+                    <th>
+                        Жанр
+                    </th>
+                    <th>
+                        К-сть сторінок
+                    </th>
+                    <th>
+                        Рік
+                    </th>
+                    <th>
+                        Видавництво
+                    </th>
+                    <th>
+                        Обкладинка
+                    </th>
+                    <th>
+                        Автор
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr style="vertical-align: middle;">
+                        <td style="width: 15%;">
+                            @book.Title
+                        </td>
+                        <td style="width: 15%;">
+                            @if(book.Description.Length > 35)
+                            {
+                                <span>@book.Description.Substring(0, 35) ...</span>
+                            }
+                            else
+                            {
+                                <span>@book.Description</span>
+                            }
+                        </td>
+                        <td style="width: 5%;">
+                            @book.Language
+                        </td>
+                        <td style="width: 10%;">
+                            @book.Genre
+                        </td>
+                        <td style="width: 5%;">
+                            @book.PageCount
+                        </td>
+                        <td style="width: 5%;">
+                            @book.Year
+                        </td>
+                        <td style="width: 7%;">
+                            @book.Publisher
+                        </td>
+                        <td style="width: 15%; text-align: center;">
+                            <img style="width: 100px;" src="~/@Settings.BookImagePath@book.Image" alt="@book.Title"/>
+                        </td>
+                        <td style="width: 13%;">
+                            @book.Author.FirstName @book.Author.LastName
+                        </td>
+                        <td style="width: 10%;" class="p-3">
+                            <a asp-controller="Book" asp-action="Update" asp-route-Id="@book.Id" class="btn btn-success mx-2">Редагувати</a>
+                            <a asp-controller="Book" asp-action="Delete" asp-route-Id="@book.Id" class="btn btn-danger mx-2">Видалити</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2 style="color: red; font-style: italic;">Authors not found</h2>
+    }
+</div>

@@ -1,0 +1,29 @@
+﻿@model Book
+
+
+<h1 style="text-align: center; margin-bottom: 40px">Детальна інформація</h1>
+
+<div class="d-flex justify-content-center" style="height: 480px; width: 70%; margin-left: 13%">
+    <div style="flex: 1; width: 30%; height: 480px;">
+        <img style="width: 100%; height: 100%;"
+             src="~/@Settings.BookImagePath@(string.IsNullOrEmpty(Model.Image) ? "default.png" : Model.Image)"
+             alt="@Model.Title">
+    </div>
+    <div style="flex: 1;">
+        <div class="card-body">
+            <h5 class="card-title">Назва: @Model.Title</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Автор: @Model.Author.FirstName @Model.Author.LastName</li>
+                <li class="list-group-item">Мова: @Model.Language</li>
+                <li class="list-group-item">К-сть сторінок: @Model.PageCount</li>
+                <li class="list-group-item">Рік випуску: @Model.Year</li>
+                <li class="list-group-item">Видавництво: @Model.Publisher</li>
+                <p class="card-text">Опис: @Model.Description</p>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-3" >
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back</a>
+</div>

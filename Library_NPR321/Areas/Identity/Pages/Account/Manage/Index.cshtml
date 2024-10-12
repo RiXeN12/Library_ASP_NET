@@ -1,0 +1,77 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <div class="text-center mb-3">
+            <img src="@Url.Content(Model.AvatarPath)" alt="User Avatar" id="avatarImage" style="border: 3px solid; border-radius: 50%; width: 200px; height:200px; margin: 5px;" class="avatar avatar-sm" />
+        </div>
+        <form id="profile-form" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
+                <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="avatarUpload" class="form-label">Upload new avatar</label>
+                <input type="file" id="avatarUpload" name="AvatarFile" class="form-control" accept=".png, .jpg, .jpeg, .gif" onchange="previewImage(this);" />
+            </div>
+            <div class="mb-3">
+                <button type="button" id="avatarActionButton" class="btn btn-danger" onclick="toggleAvatarAction();">Remove Avatar</button>
+            </div>
+            <input type="hidden" id="avatarAction" name="AvatarAction" value="" />
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const defaultAvatarPath = '@Url.Content("~/uploads/default-avatar.png")';
+
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#avatarImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                $('#avatarAction').val('');
+            }
+        }
+
+        function toggleAvatarAction() {
+            const currentAvatarPath = $('#avatarImage').attr('src');
+
+            if (currentAvatarPath === defaultAvatarPath) {
+                $('#avatarImage').attr('src', defaultAvatarPath);
+                $('#avatarAction').val('default');
+            } else {
+                $('#avatarImage').attr('src', defaultAvatarPath);
+                $('#avatarAction').val('remove');
+            }
+
+            $('#avatarUpload').val('');
+        }
+
+        $(document).ready(function () {
+            $('#profile-form').on('submit', function (e) {
+                if ($('#avatarAction').val() === '' && $('#avatarUpload').val() === '') {
+                    $('#avatarAction').val('nochange');
+                }
+            });
+        });
+    </script>
+}

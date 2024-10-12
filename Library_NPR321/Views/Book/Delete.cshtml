@@ -1,0 +1,47 @@
+﻿@model Book
+
+<h1>Delete book</h1>
+
+
+<form method="post" asp-controller="Book" asp-action="Delete">
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Title" class="m-1">Назва</label>
+        <input disabled asp-for="Title" class="form-control m-1" placeholder="Title">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Description" class="m-1">Опис</label>
+        <input disabled asp-for="Description" class="form-control m-1" placeholder="Description">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Language" class="m-1">Мова</label>
+        <input disabled asp-for="Language" class="form-control m-1" placeholder="Language">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Genre" class="m-1">Жанр</label>
+        <input disabled asp-for="Genre" class="form-control m-1" placeholder="Genre">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="PageCount" class="m-1">К-сть сторінок</label>
+        <input disabled asp-for="PageCount" class="form-control m-1" placeholder="PageCount">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Year" class="m-1">Рік випуску</label>
+        <input disabled asp-for="Year" class="form-control m-1" placeholder="Year">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label class="m-1">Автор</label>
+        <input disabled class="form-control m-1"
+               value="@Model.Author.FirstName @Model.Author.LastName"
+               placeholder="Автор">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Publisher" class="m-1">Видавництво</label>
+        <input disabled asp-for="Publisher" class="form-control m-1" placeholder="Publisher">
+    </div>
+    <div class="form-group" style="width: 40%">
+        <label asp-for="Image" class="m-1">Обкладинка</label>
+        <input disabled asp-for="Image" class="form-control m-1" placeholder="Image">
+    </div>
+    <button type="submit" class="btn btn-danger m-2">Delete</button>
+    <a asp-controller="Book" asp-action="Index" class="btn btn-secondary m-2">Back</a>
+</form>

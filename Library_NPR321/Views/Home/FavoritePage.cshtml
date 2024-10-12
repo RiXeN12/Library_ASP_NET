@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Book>
+
+<section style="background-color: #fdccbc;">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col">
+                <p><span class="h2">Favorite books</span><span class="h4">(@Model.Count() item in your list)</span></p>
+
+                @foreach(var book in Model)
+                {
+                    <div class="card mb-4">
+                        <div class="card-body p-4">
+
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <img src="~/@Settings.BookImagePath@book.Image"
+                                         class="img-fluid" alt="Generic placeholder image">
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div>
+                                        <p class="small text-muted mb-4 pb-2">Назва</p>
+                                        <p class="lead fw-normal mb-0">@book.Title</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div>
+                                        <p class="small text-muted mb-4 pb-2">Жанр</p>
+                                        <p class="lead fw-normal mb-0">
+                                            @book.Genre
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 d-flex justify-content-center">
+                                    <div>
+                                        <p class="small text-muted mb-4 pb-2">Сторінок</p>
+                                        <p class="lead fw-normal mb-0">@book.PageCount</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div>
+                                        <p class="small text-muted mb-4 pb-2">Рік</p>
+                                        <p class="lead fw-normal mb-0">@book.Year</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div>
+                                        <p class="small text-muted mb-4 pb-2">Автор</p>
+                                        <p class="lead fw-normal mb-0">@book.Author.FirstName @book.Author.LastName</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 d-flex justify-content-center">
+                                    <a asp-controller="Home" asp-action="RemoveFromFavorite" asp-route-Id="@book.Id"><i class="fa-solid fa-trash"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

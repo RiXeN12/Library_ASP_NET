@@ -1,0 +1,31 @@
+﻿@model Library_NPR321.Models.ViewModels.FavoriteBookVM
+
+<div class="card col-3 mx-1 mt-1 filter author-@Model.Book.Author.Id" style="width: 300px;">
+    <div>
+        <img style="height: 400px;" src="~/@Settings.BookImagePath@(string.IsNullOrEmpty(Model.Book.Image) ? "default.png" : Model.Book.Image)" class="card-img-top" alt="@Model.Book.Title">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Book.Title</h5>
+            <p class="card-text">@Model.Book.Author.FirstName @Model.Book.Author.LastName</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Жанр - @Model.Book.Genre</li>
+            <li class="list-group-item">Ст. - @Model.Book.PageCount</li>
+            <li class="list-group-item">Мова - @Model.Book.Language</li>
+        </ul>
+        <div class="card-body">
+            <div>
+                @if(Model.IsFavorite)
+                {
+                    <a asp-action="RemoveFromFavorite" asp-controller="Home" asp-route-Id="@Model.Book.Id" class="card-link btn btn-danger w-100 mb-1">Видалити з улюблених</a>
+                }
+                else
+                {
+                    <a asp-action="AddToFavorite" asp-controller="Home" asp-route-Id="@Model.Book.Id" class="card-link btn btn-success w-100 mb-1">Додати до улюблених</a>
+                }
+            </div>
+            <div>
+                <a asp-action="BookDetails" asp-controller="Home" asp-route-id="@Model.Book.Id" class="card-link btn btn-primary w-100">Детальніше</a>
+            </div>
+        </div>
+    </div>
+</div>
